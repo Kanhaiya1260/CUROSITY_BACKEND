@@ -1,0 +1,18 @@
+package com.app.Services;
+
+import javax.transaction.Transactional;
+
+import org.springframework.stereotype.Service;
+
+import com.app.Dao.ProductDao;
+import com.app.Dao.ProductVariantDao;
+
+@Service
+@Transactional
+public interface ProductService {
+	
+	private ProductDao sf;
+	
+	private ProductVariantDao variant;
+
+}

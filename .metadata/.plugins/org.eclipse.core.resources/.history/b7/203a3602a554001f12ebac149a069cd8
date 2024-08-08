@@ -1,0 +1,25 @@
+package com.app.Services;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.app.Dao.UserDao;
+import com.app.Entities.User;
+
+@Service
+@Transactional
+public class UserServiceImpl implements UserService{
+	
+	@Autowired
+	UserDao dao;
+
+	@Override
+	public String register(User user) {
+		// TODO Auto-generated method stub
+		dao.save(user);
+		return null;
+	}
+	
+}

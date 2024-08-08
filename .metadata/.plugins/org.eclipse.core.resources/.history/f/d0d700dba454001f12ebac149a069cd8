@@ -1,0 +1,7 @@
+package com.app.Services;
+
+import com.app.Entities.User;
+
+public interface UserService {
+	public String register(User user);
+}

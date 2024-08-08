@@ -1,0 +1,12 @@
+package com.app.Dao;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import com.app.Entities.Filter;
+
+public interface FilterDao extends JpaRepository<Filter, Long> {
+
+	@Query("slect i from Filter i where :color is NULL or i.color = :color and :size is NULL or i.size = :size")
+	public List<imgid> findByColorAndSize();
+}

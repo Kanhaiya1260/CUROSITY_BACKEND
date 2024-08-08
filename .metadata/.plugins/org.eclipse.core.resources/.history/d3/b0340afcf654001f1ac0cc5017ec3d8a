@@ -1,0 +1,37 @@
+package com.app.Services;
+
+import java.util.List;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.app.Dao.FilterDao;
+import com.app.Dao.ProductDao;
+import com.app.Dao.ProductVariantDao;
+import com.app.dto.ProdFilterReqDTO;
+import com.app.dto.ProductResDTO;
+
+public class ProductServiceImpl implements ProductService{
+
+	@Autowired 
+	private ProductDao prod;
+	
+	@Autowired 
+	private ProductVariantDao variant;
+	
+	@Autowired
+	private FilterDao filter;
+	
+	@Autowired
+	ModelMapper mapper;
+
+	@Override
+	public List<ProductResDTO> getProductsByFilter(ProdFilterReqDTO prod) {
+		
+		List<ProductResDTO> prods = mapper.map
+				
+		List<Long> imgids = filter.findByColorAndSize(prod.getColor(), prod.getSize());
+		
+		return null;
+	}
+}

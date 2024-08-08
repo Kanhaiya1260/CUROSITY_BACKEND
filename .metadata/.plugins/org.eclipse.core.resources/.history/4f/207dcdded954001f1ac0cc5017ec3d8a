@@ -1,0 +1,16 @@
+package com.app.Services;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.app.Dao.ProductDao;
+import com.app.Dao.ProductVariantDao;
+
+public class ProductServiceImpl {
+
+	@Autowired 
+	private ProductDao prod;
+	
+	@Autowired 
+	private ProductVariantDao variant;
+
+}

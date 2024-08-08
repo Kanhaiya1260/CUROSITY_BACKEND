@@ -1,0 +1,10 @@
+package com.app.Entities;
+
+public class Filter {
+	
+	private Long imgid;
+	
+	private String color;
+	
+	private Size size;
+}

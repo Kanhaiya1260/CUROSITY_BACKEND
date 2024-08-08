@@ -1,0 +1,10 @@
+package com.app.Services;
+
+import com.app.Entities.User;
+import com.app.dto.UserDto;
+
+public interface UserService {
+	public String register(UserDto user);
+	
+	public User login(String email,String password);
+}

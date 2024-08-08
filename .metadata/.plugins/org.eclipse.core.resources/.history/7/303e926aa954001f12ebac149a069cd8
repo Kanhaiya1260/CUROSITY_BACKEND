@@ -1,0 +1,31 @@
+package com.app.Services;
+
+import javax.transaction.Transactional;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.app.Dao.UserDao;
+import com.app.Entities.User;
+import com.app.dto.UserDto;
+
+@Service
+@Transactional
+public class UserServiceImpl implements UserService{
+	
+	@Autowired
+	UserDao dao;
+	
+	@Autowired
+	ModelMapper mapper;
+
+	@Override
+	public String register(UserDto user) {
+		// TODO Auto-generated method stub
+		User newUser = mapper.map(user,User.class); 
+		dao.save(newUser);
+		return null;
+	}
+	
+}
