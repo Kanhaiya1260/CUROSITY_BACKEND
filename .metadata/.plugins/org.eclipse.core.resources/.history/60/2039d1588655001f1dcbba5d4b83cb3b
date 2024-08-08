@@ -1,0 +1,100 @@
+package com.app.Services;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.app.Dao.FilterDao;
+import com.app.Dao.ProductDao;
+import com.app.Dao.ProductVariantDao;
+import com.app.Entities.Product;
+import com.app.Entities.ProductVariant;
+import com.app.dto.ProdFilterReqDTO;
+import com.app.dto.ProductReqDTO;
+import com.app.dto.ProductResDTO;
+import com.app.dto.ProductVariantDTO;
+
+import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
+@Transactional
+public class ProductServiceImpl implements ProductService {
+
+    @Autowired 
+    private ProductDao prod;
+    
+    @Autowired 
+    private ProductVariantDao variant;
+    
+    @Autowired
+    private FilterDao filter;
+    
+    @Autowired
+    private ModelMapper mapper;
+
+    @Override
+    public List<ProductResDTO> getProductsByFilter(ProdFilterReqDTO product) {
+        // Retrieve image IDs based on color and/or size
+        List<Long> imgids = getImgids(product);
+
+        // Retrieve all products or filter by category if specified
+        List<Product> allProducts = (product.getCat() == null) ? prod.findAll() : prod.findByCategoryName(product.getCat());
+
+        // Filter products based on price range if specified
+        List<Product> filteredProducts = allProducts.stream()
+            .filter(p -> product.getPrice() == null ||
+                         (p.getPrice() >= product.getPrice()[0] && p.getPrice() <= product.getPrice()[1]))
+            .collect(Collectors.toList());
+
+        List<ProductResDTO> result = new ArrayList<>();
+
+        for (Product p : filteredProducts) {
+            // Retrieve variants for the product
+            List<ProductVariant> variants = variant.findBypid(p.getPid());
+
+            // Filter variants based on image IDs if filters are applied
+            List<ProductVariant> filteredVariants = imgids.isEmpty() ? variants : 
+                variants.stream()
+                    .filter(v -> imgids.contains(v.getImgid()))
+                    .collect(Collectors.toList());
+
+            ProductResDTO dto = new ProductResDTO();
+            dto.setProduct(p);
+            dto.setVariants(filteredVariants.stream()
+                .map(v -> mapper.map(v, ProductVariantDTO.class))  // Map to DTO
+                .collect(Collectors.toList()));
+
+            result.add(dto);
+        }
+
+        return result;
+    }
+
+
+    @Override
+    public String addProduct(ProductReqDTO prods) {
+        // Save the product
+        Product newProduct = prod.save(prods.getProduct());
+        
+        // Check if variants are provided
+        if (prods.getVariants() != null && !prods.getVariants().isEmpty()) {
+            // Map ProductVariantDTO to ProductVariant
+            List<ProductVariant> productVariants = prods.getVariants().stream().map(variantDTO -> {
+                ProductVariant variant = new ProductVariant();
+                variant.setColor(variantDTO.getColor());
+                variant.setStock(variantDTO.getStock());
+                variant.setImgid(variantDTO.getImgid());
+                variant.setProduct(newProduct);  
+                return variant;
+            }).collect(Collectors.toList());
+
+            // Save the product variants
+            variant.saveAll(productVariants);
+        }
+        
+        return "Product added successfully!";
+    }
+}

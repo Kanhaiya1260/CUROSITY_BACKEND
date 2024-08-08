@@ -37,7 +37,6 @@
     <fullyQualifiedTypeName name="com.app.Entities.Category"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
     <fullyQualifiedTypeName name="javax.persistence.ManyToOne"/>
-    <fullyQualifiedTypeName name="com.app.Entities.ProductVariant"/>
     <fullyQualifiedTypeName name="com.app.Entities.Product"/>
     <fullyQualifiedTypeName name="com.app.dto.ProductResDTO"/>
     <fullyQualifiedTypeName name="com.app.Dao.ProductDao"/>
@@ -45,6 +44,9 @@
     <fullyQualifiedTypeName name="com.app.Dao.FilterDao"/>
     <fullyQualifiedTypeName name="com.app.dto.ProdFilterReqDTO"/>
     <fullyQualifiedTypeName name="com.app.dto.ProductVariantDTO"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="javax.persistence.Enumerated"/>
+    <fullyQualifiedTypeName name="com.app.dto.ProductReqDTO"/>
+    <fullyQualifiedTypeName name="lombok.ToString"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="com.app.Entities.ProductVariant"/>
 </qualifiedTypeNameHistroy>

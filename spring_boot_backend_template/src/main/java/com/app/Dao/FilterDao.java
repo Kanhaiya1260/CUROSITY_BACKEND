@@ -11,5 +11,14 @@ import com.app.Entities.Size;
 
 public interface FilterDao extends JpaRepository<Filter, Long> {
 
-	@Query("SELECT i.imgid FROM Filter i WHERE (:color IS NULL OR i.color = :color) AND (:size IS NULL OR i.size = :size)")
-	List<Long> findByColorAndSize(@Param("color") String color, @Param("size") Size size);}
+	@Query("SELECT f.imgid FROM Filter f WHERE (:color IS NULL OR f.color = :color) AND (:size IS NULL OR f.size = :size)")
+	List<Long> findByColorAndSize(@Param("color") String color, @Param("size") Size size);
+
+	@Query("SELECT f.imgid FROM Filter f WHERE f.color = :color")
+	List<Long> findByColor(@Param("color") String color);
+
+	@Query("SELECT f.imgid FROM Filter f WHERE f.size = :size")
+	List<Long> findBySize(@Param("size") Size size);
+
+	
+}

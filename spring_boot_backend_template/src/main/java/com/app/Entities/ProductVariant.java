@@ -28,10 +28,7 @@ public class ProductVariant {
 	@ManyToOne
 	@JoinColumn(name="pid")
 	private Product product;
-	
-	@Lob
-	private byte[] image;
-	
+			
 	private int stock;
 	
 	@Column(length = 15)
