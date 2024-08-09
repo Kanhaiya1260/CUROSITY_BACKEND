@@ -42,8 +42,8 @@ public class ProductServiceImpl implements ProductService {
         List<Product> prods=new ArrayList<>();
         for(Product p : prodss) {
         	if(product.getPrice()!=null && p.getPrice()>=product.getPrice()[0] && p.getPrice()<=product.getPrice()[1]) {
-        	prods.add(p);
         	}
+        	prods.add(p);
         	
         }
         

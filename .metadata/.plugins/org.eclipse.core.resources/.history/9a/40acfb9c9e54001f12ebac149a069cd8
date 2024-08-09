@@ -1,7 +1,0 @@
-package com.app.Dao;
-
-import org.springframework.data.jpa.repository.support.JpaRepositoryFactory;
-
-public class UserDao extends JpaRepositoryFactory {
-	Optional<User> findByEmail();
-}

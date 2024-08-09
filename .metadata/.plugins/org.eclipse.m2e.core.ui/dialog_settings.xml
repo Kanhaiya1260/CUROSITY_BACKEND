@@ -2,6 +2,7 @@
 <section name="Workbench">
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="E:\BackEndCurositees\CUROSITY_BACKEND\spring_boot_backend_template"/>
 			<item value="C:\Users\SHRI\OneDrive\Desktop\PROJECT\BITCH_BACKEND\spring_boot_backend_template"/>
 		</list>
 		<list key="projectNameTemplate">
