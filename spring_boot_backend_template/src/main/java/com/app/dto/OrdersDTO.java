@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrdersDto {
+public class OrdersDTO {
 	private Long orderId;
     private LocalDate orderDate = LocalDate.now();
     private LocalDateTime deliveryDate = LocalDateTime.now().plusDays(7);

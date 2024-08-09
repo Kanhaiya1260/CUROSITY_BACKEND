@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.app.Services.OrdersService;
 import com.app.dto.ApiResponse;
-import com.app.dto.OrdersDto;
+import com.app.dto.OrdersDTO;
 
 @RestController
 @RequestMapping("/orders")
@@ -24,7 +25,7 @@ public class OrdersController {
      private OrdersService orderService;
      
      @PostMapping
-     public ResponseEntity<?>placeNewOrder(@RequestBody OrdersDto newOrder){
+     public ResponseEntity<?>placeNewOrder(@RequestBody OrdersDTO newOrder){
     	 try {
     		return ResponseEntity.status(HttpStatus.CREATED)
     		.body(orderService.placeOrder(newOrder));
@@ -55,5 +56,8 @@ public class OrdersController {
     				 .body(new ApiResponse(e.getMessage()));
  		} 
      }
-     
+     @GetMapping("/trending")
+     public ResponseEntity<?>trendingOrders(){
+    	return ResponseEntity.ok(orderService.getTrendingProducts());
+     }
 }

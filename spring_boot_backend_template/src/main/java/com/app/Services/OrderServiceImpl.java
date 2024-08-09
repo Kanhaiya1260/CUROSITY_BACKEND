@@ -2,7 +2,9 @@ package com.app.Services;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.criteria.Order;
 import javax.transaction.Transactional;
@@ -21,7 +23,8 @@ import com.app.Entities.Product;
 import com.app.Entities.User;
 import com.app.customException.ResourceNotFoundException;
 import com.app.dto.ApiResponse;
-import com.app.dto.OrdersDto;
+import com.app.dto.OrdersDTO;
+import com.app.dto.TrendingOrderDTO;
 
 @Service
 @Transactional
@@ -43,7 +46,7 @@ public class OrderServiceImpl implements OrdersService {
 	private UserDao userDao;
 	
 	@Override
-	public ApiResponse placeOrder(OrdersDto order) {
+	public ApiResponse placeOrder(OrdersDTO order) {
 		// TODO Auto-generated method stub
 		//finding Relations through their Id's
 		Product product = productDao.findById(order.getProductId())
@@ -93,10 +96,20 @@ public class OrderServiceImpl implements OrdersService {
 	}
 
 	@Override
-	public List<Orders> getTrendingOrders() {
-		// TODO Auto-generated method stub
+	public List<Product> getTrendingProducts() {
+		 //TODO Auto-generated method stub
+		List<TrendingOrderDTO> listOfOrders = orderDao.findOrdersInDateRange(LocalDate.now().minusDays(7),LocalDate.now());
 		
-		return null;
+		listOfOrders =  listOfOrders.stream()
+				.sorted((o1,o2) -> o2.getTotalQuantity().compareTo(o1.getTotalQuantity()))
+				.limit(6)
+				.collect(Collectors.toList());
+		List<Product> result = new ArrayList<>();
+		for(TrendingOrderDTO order : listOfOrders) {
+			Product currentProduct = productDao.findById(order.getProductId())
+					.orElseThrow(()-> new ResourceNotFoundException("Product Not Found"));
+				result.add(currentProduct);	
+		}
+		return result;
 	}
-    
 }

@@ -11,7 +11,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class AddressDto {
+public class AddressDTO {
    private String currentAddress;
    private String state;
    private String city;
