@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Spring]]></title><description><![CDATA[Level up your Java code and explore what Spring can do for you.]]></description><link>https://spring.io</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 09 Aug 2024 12:32:23 GMT</lastBuildDate><item><title><![CDATA[Spring AI Embraces OpenAI's Structured Outputs: Enhancing JSON Response Reliability]]></title><link>https://spring.io/blog/2024/08/09/spring-ai-embraces-openais-structured-outputs-enhancing-json-response</link><guid isPermaLink="true">https://spring.io/blog/2024/08/09/spring-ai-embraces-openais-structured-outputs-enhancing-json-response</guid><dc:creator><![CDATA[Christian Tzolov]]></dc:creator><pubDate>Fri, 09 Aug 2024 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;OpenAI recently &lt;a href=&quot;https://openai.com/index/introducing-structured-outputs-in-the-api/&quot;&gt;introduced&lt;/a&gt; a powerful feature called Structured Outputs, which ensures that AI-generated responses adhere strictly to a predefined JSON schema. This feature significantly improves the reliability and usability of AI-generated content in real-world applications. Today, we&apos;re excited to announce that Spring AI (1.0.0-SNAPSHOT) has &lt;a href=&quot;https://docs.spring.io/spring-ai/reference/api/chat/openai-chat.html#_structured_outputs&quot;&gt;fully integrated support&lt;/a&gt; for OpenAI&apos;s Structured Outputs, bringing this capability to Java developers in a seamless, Spring-native way.&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Spring]]></title><description><![CDATA[Level up your Java code and explore what Spring can do for you.]]></description><link>https://spring.io</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 10 Aug 2024 10:26:49 GMT</lastBuildDate><item><title><![CDATA[Spring AI Embraces OpenAI's Structured Outputs: Enhancing JSON Response Reliability]]></title><link>https://spring.io/blog/2024/08/09/spring-ai-embraces-openais-structured-outputs-enhancing-json-response</link><guid isPermaLink="true">https://spring.io/blog/2024/08/09/spring-ai-embraces-openais-structured-outputs-enhancing-json-response</guid><dc:creator><![CDATA[Christian Tzolov]]></dc:creator><pubDate>Fri, 09 Aug 2024 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;OpenAI recently &lt;a href=&quot;https://openai.com/index/introducing-structured-outputs-in-the-api/&quot;&gt;introduced&lt;/a&gt; a powerful feature called Structured Outputs, which ensures that AI-generated responses adhere strictly to a predefined JSON schema. This feature significantly improves the reliability and usability of AI-generated content in real-world applications. Today, we&apos;re excited to announce that Spring AI (1.0.0-SNAPSHOT) has &lt;a href=&quot;https://docs.spring.io/spring-ai/reference/api/chat/openai-chat.html#_structured_outputs&quot;&gt;fully integrated support&lt;/a&gt; for OpenAI&apos;s Structured Outputs, bringing this capability to Java developers in a seamless, Spring-native way.&lt;/p&gt;
 &lt;p&gt;Following diagram shows how the new Structured Outputs feature extends the &lt;a href=&quot;https://platform.openai.com/docs/api-reference/chat&quot;&gt;OpenAI Chat API&lt;/a&gt;:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;//images.ctfassets.net/mnrwi97vnhts/7yE3RZ08JwZoDJfDLntNs6/7257fd461d289f021489477d9657a766/OpenAI-StructuredOutputs-Featrures.jpg&quot; alt=&quot;OpenAI-StructuredOutputs-Featrures&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;//images.ctfassets.net/mnrwi97vnhts/76DUCzHLPmiqz2GXcvPEXw/2370f14669c63cb8037abc2dbc7ee47f/Restored_Spring_AI__2_.jpg&quot; alt=&quot;Restored Spring AI (2)&quot;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Spring AI already provides a powerful, &lt;a href=&quot;https://docs.spring.io/spring-ai/reference/api/structured-output-converter.html&quot;&gt;Model-agnostic Structured Output&lt;/a&gt; utilities that can be use with various AI models including the OpenAI.
 The OpenAI Structured Outputs feature offers an additional, consistent, but a model specific solution, currently available only to the &lt;code&gt;gpt-4o&lt;/code&gt;, &lt;code&gt;gpt-4o-mini&lt;/code&gt; and later models.&lt;/p&gt;
@@ -33,10 +33,10 @@ The OpenAI Structured Outputs feature offers an additional, consistent, but a mo
   &quot;&quot;&quot;;
 
 Prompt prompt = new Prompt(&quot;how can I solve 8x + 7 = -23&quot;,
-OpenAiChatOptions.builder()
-    .withModel(ChatModel.GPT_4_O_MINI)
-    .withResponseFormat(new ResponseFormat(ResponseFormat.Type.JSON_SCHEMA, jsonSchema))
-    .build());
+  OpenAiChatOptions.builder()
+      .withModel(ChatModel.GPT_4_O_MINI)
+      .withResponseFormat(new ResponseFormat(ResponseFormat.Type.JSON_SCHEMA, jsonSchema))
+      .build());
 
 ChatResponse response = this.openAiChatModel.call(prompt);
 &lt;/code&gt;&lt;/pre&gt;
@@ -61,10 +61,10 @@ var outputConverter = new BeanOutputConverter&amp;#x3C;&gt;(MathReasoning.class)
 var jsonSchema = outputConverter.getJsonSchema();
 
 Prompt prompt = new Prompt(&quot;how can I solve 8x + 7 = -23&quot;,
-OpenAiChatOptions.builder()
-    .withModel(ChatModel.GPT_4_O_MINI)
-    .withResponseFormat(new ResponseFormat(ResponseFormat.Type.JSON_SCHEMA, jsonSchema))
-    .build());
+  OpenAiChatOptions.builder()
+      .withModel(ChatModel.GPT_4_O_MINI)
+      .withResponseFormat(new ResponseFormat(ResponseFormat.Type.JSON_SCHEMA, jsonSchema))
+      .build());
 
 ChatResponse response = this.openAiChatModel.call(prompt);
 String content = response.getResult().getOutput().getContent();
@@ -91,10 +91,29 @@ spring.ai.openai.chat.options.response-format.strict=true
 &lt;h1 id=&quot;references&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#references&quot; aria-label=&quot;references permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;References&lt;/h1&gt;
 &lt;p&gt;For further information check the Spring AI and OpenAI reference documentations.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://docs.spring.io/spring-ai/reference/api/chat/openai-chat.html#_structured_outputs&quot;&gt;Spring AI OpenAI Structured Outputs&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://docs.spring.io/spring-ai/reference/api/structured-output-converter.html&quot;&gt;Spring AI, model-agnostic Structured Output converter&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Blog: &lt;a href=&quot;https://spring.io/blog/2024/05/09/spring-ai-structured-output&quot;&gt;Spring AI - Structured Output&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://platform.openai.com/docs/guides/structured-outputs&quot;&gt;OpenAI Structured Outputs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://docs.spring.io/spring-ai/reference/api/chat/openai-chat.html#_structured_outputs&quot;&gt;Spring AI OpenAI Structured Outputs&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://docs.spring.io/spring-ai/reference/api/structured-output-converter.html&quot;&gt;Spring AI, model-agnostic Structured Output converter&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://spring.io/blog/2024/05/09/spring-ai-structured-output&quot;&gt;Spring AI - Structured Output&lt;/a&gt; (blog)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://platform.openai.com/docs/guides/structured-outputs&quot;&gt;OpenAI Structured Outputs&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Spring AI Blogs:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://spring.io/blog/2024/07/31/spring-ai-with-groq-a-blazingly-fast-ai-inference-engine&quot;&gt;Spring AI with Groq - a blazingly fast AI inference engine&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://spring.io/blog/2024/07/26/spring-ai-with-ollama-tool-support&quot;&gt;Spring AI with Ollama Tool Support&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://spring.io/blog/2024/05/09/spring-ai-structured-output&quot;&gt;Spring AI - Structured Output&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://spring.io/blog/2024/04/19/spring-ai-multimodality-orbis-sensualium-pictus&quot;&gt;Spring AI - Multimodality - Orbis Sensualium Pictus&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://spring.io/blog/2024/03/06/function-calling-in-java-and-spring-ai-using-the-latest-mistral-ai-api&quot;&gt;Function Calling in Java and Spring AI using the latest Mistral AI API&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://spring.io/blog/2023/02/24/spring-cloud-function-for-azure-function&quot;&gt;Spring Cloud Function for Azure Function&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1 id=&quot;conclusion&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#conclusion&quot; aria-label=&quot;conclusion permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Conclusion&lt;/h1&gt;
 &lt;p&gt;Spring AI&apos;s support for OpenAI&apos;s Structured Outputs feature makes the AI-powered applications more reliable and easier to develop.

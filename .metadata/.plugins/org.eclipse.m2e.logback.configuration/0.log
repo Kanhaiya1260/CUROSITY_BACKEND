@@ -3252,3 +3252,10 @@
 2024-08-10 01:41:15,208 [Worker-273: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2024-08-10 01:41:15,208 [Worker-273: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
 2024-08-10 01:41:15,208 [Worker-273: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory E:\BackEndCurositees\CUROSITY_BACKEND\spring_boot_backend_template\src\test\resources
+2024-08-10 01:47:04,124 [Worker-279: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2024-08-10 01:47:04,124 [Worker-279: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2024-08-10 01:47:04,124 [Worker-279: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory E:\BackEndCurositees\CUROSITY_BACKEND\spring_boot_ems_backend_final\src\main\resources
+2024-08-10 01:47:04,124 [Worker-279: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory E:\BackEndCurositees\CUROSITY_BACKEND\spring_boot_ems_backend_final\src\main\resources
+2024-08-10 01:47:04,126 [Worker-279: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2024-08-10 01:47:04,126 [Worker-279: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2024-08-10 01:47:04,126 [Worker-279: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory E:\BackEndCurositees\CUROSITY_BACKEND\spring_boot_ems_backend_final\src\test\resources

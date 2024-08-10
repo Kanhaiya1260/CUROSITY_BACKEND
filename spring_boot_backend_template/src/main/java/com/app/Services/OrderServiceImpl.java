@@ -88,7 +88,7 @@ public class OrderServiceImpl implements OrdersService {
 		Orders currentOrder = orderDao.findById(OrderId)
 				.orElseThrow(() -> new ResourceNotFoundException("Order Dosn't Exists"));
 		if(currentOrder.isStatus() == false) {
-		    currentOrder.setDehiveryDate(LocalDateTime.now());
+		    currentOrder.setDelhiveryDate(LocalDateTime.now());
 		    currentOrder.setStatus(true);
 			return new ApiResponse("Order Updated SuccessFully");
 		}	
@@ -97,7 +97,7 @@ public class OrderServiceImpl implements OrdersService {
 
 	@Override
 	public List<Product> getTrendingProducts() {
-		 //TODO Auto-generated method stub
+		 
 		List<TrendingOrderDTO> listOfOrders = orderDao.findOrdersInDateRange(LocalDate.now().minusDays(7),LocalDate.now());
 		
 		listOfOrders =  listOfOrders.stream()

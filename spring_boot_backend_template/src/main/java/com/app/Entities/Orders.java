@@ -36,7 +36,7 @@ public class Orders {
    @Column(name = "order_date",nullable = false)
    private LocalDate orderDate = LocalDate.now();
    @Column(name = "delhivery_date",nullable = false)
-   private LocalDateTime dehiveryDate = LocalDateTime.now().plusDays(7);
+   private LocalDateTime delhiveryDate = LocalDateTime.now().plusDays(7);
    @NotNull
    private Integer quantity;
    boolean Status = false;
