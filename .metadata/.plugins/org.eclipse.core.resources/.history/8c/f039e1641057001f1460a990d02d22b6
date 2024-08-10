@@ -1,0 +1,17 @@
+package com.app.Dao;
+
+import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.data.util.Pair;
+
+import com.app.Entities.Filter;
+import com.app.Entities.Size;
+
+public interface FilterDao extends JpaRepository<Filter, Long> {
+
+	@Query("SELECT f.imgid f.size FROM Filter f WHERE (:color IS NULL OR f.color = :color) AND (:size IS NULL OR f.size = :size)")
+	List<Pair<Long, Size>> findByColorAndSize(@Param("color") String color, @Param("size") Size size);
+	
+	}

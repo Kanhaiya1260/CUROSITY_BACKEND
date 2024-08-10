@@ -1,7 +1,6 @@
 package com.app.Controllers;
 
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,9 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.app.Services.UserService;
 import com.app.dto.UserRegisterDTO;
+import com.app.dto.ApiResponse;
 import com.app.dto.UserLoginDTO;
 
 
@@ -29,7 +28,6 @@ public class UserController {
 		try {
 			return ResponseEntity.status(HttpStatus.CREATED).body(serv.register(u));
 		} catch (Exception e) {
-			// TODO: handle exception
 			return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(e.getMessage());
 		}
 	}
@@ -39,8 +37,7 @@ public class UserController {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(serv.login(u));
 		} catch (Exception e) {
-			// TODO: handle exception
-			return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(e.getMessage());
+			return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(new ApiResponse(e.getMessage()));
 		}
 	}
 }

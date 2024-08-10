@@ -2,7 +2,6 @@ package com.app.dto;
 
 import com.app.Entities.Category;
 import com.app.Entities.Size;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -3,7 +3,6 @@ package com.app.Dao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-
 import com.app.Entities.ProductVariant;
 import java.lang.String;
 import java.util.List;
@@ -17,6 +16,6 @@ public interface ProductVariantDao extends JpaRepository<ProductVariant, Long> {
     List<ProductVariant> findBypid(@Param("pid") Long pid);
 
 	@Query("SELECT p FROM ProductVariant p WHERE p.imgid IN :imgids")
-	List<ProductVariant> findByImgid(@Param("imgids") List<Long> imgids);
+	List<ProductVariant> findByImgid(@Param("imgids") Long imgids);
 
 }

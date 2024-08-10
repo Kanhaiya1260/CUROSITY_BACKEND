@@ -1,14 +1,9 @@
 package com.app.dto;
 
 import java.time.LocalDate;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-
-import com.app.Entities.Account;
-import com.app.Entities.Address;
 import com.app.Entities.Role;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

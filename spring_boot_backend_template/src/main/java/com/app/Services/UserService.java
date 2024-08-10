@@ -6,6 +6,5 @@ import com.app.dto.UserLoginDTO;
 
 public interface UserService {
 	public String register(UserRegisterDTO user);
-	
 	public User login(UserLoginDTO user);
 }
