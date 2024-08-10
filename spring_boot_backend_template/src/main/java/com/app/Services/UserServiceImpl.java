@@ -1,11 +1,9 @@
 package com.app.Services;
 
 import javax.transaction.Transactional;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.app.Dao.UserDao;
 import com.app.Entities.User;
 import com.app.dto.UserRegisterDTO;

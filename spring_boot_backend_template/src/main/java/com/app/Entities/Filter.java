@@ -13,6 +13,9 @@ public class Filter {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long fid;
+    
+    @Column()
     private Long imgid;
 
     @Column(length = 20)
@@ -21,5 +24,4 @@ public class Filter {
     @Enumerated(EnumType.STRING)
     private Size size;
 
-    // Getters and Setters
 }

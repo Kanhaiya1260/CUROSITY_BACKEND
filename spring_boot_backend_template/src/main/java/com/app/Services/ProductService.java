@@ -1,18 +1,18 @@
 package com.app.Services;
 
 import java.util.List;
-
 import javax.transaction.Transactional;
-
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
-
+import com.app.Entities.ProductVariant;
 import com.app.dto.ProdFilterReqDTO;
-import com.app.dto.ProductResDTO;
+import com.app.dto.ProductDTO;
 
 @Service
 @Transactional
 public interface ProductService {
 	
-	public List<ProductResDTO> getProductsByFilter(ProdFilterReqDTO prod);
+	public List<ProductVariant> getProductsByFilter(ProdFilterReqDTO prod);
+
+	public String addProduct(ProductDTO prods);
+	
 }

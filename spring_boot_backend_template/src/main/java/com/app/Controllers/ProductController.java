@@ -1,11 +1,8 @@
 package com.app.Controllers;
 
 import java.util.List;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -15,13 +12,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.app.Entities.Category;
+import com.app.Entities.ProductVariant;
 import com.app.Entities.Size;
 import com.app.Services.ProductService;
+import com.app.dto.ApiResponse;
 import com.app.dto.ProdFilterReqDTO;
-import com.app.dto.ProductResDTO;
-import com.app.dto.UserRegisterDTO;
+import com.app.dto.ProductDTO;
 
 @RestController
 @RequestMapping("/product")
@@ -32,7 +29,7 @@ public class ProductController {
 	ProductService ps;
 	
 	@GetMapping("/filter")
-	public ResponseEntity<List<ProductResDTO>> getProductByFilter(
+	public ResponseEntity<?> getProductByFilter(
 	        @RequestParam(required = false) String color,
 	        @RequestParam(required = false) Size size,
 	        @RequestParam(required = false) Category cat,
@@ -46,8 +43,16 @@ public class ProductController {
 	    filter.setPrice(price);
 
 	    // Fetch products using the service
-	    List<ProductResDTO> products = ps.getProductsByFilter(filter);
+	    List<ProductVariant> products = ps.getProductsByFilter(filter);
 	    return ResponseEntity.ok(products);
+	}
+	@PostMapping("/addproduct")
+	public ResponseEntity<?> login(@RequestBody @Valid ProductDTO p){
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(ps.addProduct(p));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(new ApiResponse(e.getMessage()));
+		}
 	}
 
 
