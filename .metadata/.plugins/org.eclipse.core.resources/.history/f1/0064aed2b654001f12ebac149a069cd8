@@ -1,5 +1,0 @@
-package com.app.Entities;
-
-public enum Category {
-
-}
