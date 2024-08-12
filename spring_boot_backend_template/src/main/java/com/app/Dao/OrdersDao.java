@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.app.Entities.Orders;
+import com.app.dto.OrderResponseDto;
 import com.app.dto.TrendingOrderDTO;
 
 public interface OrdersDao extends JpaRepository<Orders,Long> {
@@ -16,4 +17,7 @@ public interface OrdersDao extends JpaRepository<Orders,Long> {
 		       "WHERE o.orderDate BETWEEN :startDate AND :endDate " +
 		       "GROUP BY o.product.pid")
 	List<TrendingOrderDTO> findOrdersInDateRange(@Param("startDate")LocalDate startDate,@Param("endDate")LocalDate endDate);
+	
+	@Query("SELECT o FROM Orders o JOIN FETCH o.delhiveryAddress WHERE o.user.id =:Id")
+	List<Orders> findOrdersById(@Param("Id")Long Id);
 }

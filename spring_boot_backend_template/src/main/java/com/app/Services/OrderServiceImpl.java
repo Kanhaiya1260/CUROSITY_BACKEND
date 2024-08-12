@@ -11,7 +11,9 @@ import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import com.app.Dao.AddressDao;
 import com.app.Dao.OrdersDao;
@@ -23,6 +25,7 @@ import com.app.Entities.Product;
 import com.app.Entities.User;
 import com.app.customException.ResourceNotFoundException;
 import com.app.dto.ApiResponse;
+import com.app.dto.OrderResponseDto;
 import com.app.dto.OrdersDTO;
 import com.app.dto.TrendingOrderDTO;
 
@@ -111,5 +114,18 @@ public class OrderServiceImpl implements OrdersService {
 				result.add(currentProduct);	
 		}
 		return result;
+	}
+	@Override
+	public List<OrderResponseDto> UserOrders(Long Id){
+		
+		List<Orders> userOrders = orderDao.findOrdersById(Id);
+		List<OrderResponseDto> newUserOrders = new ArrayList<OrderResponseDto>();
+		for(Orders o : userOrders ) {
+			OrderResponseDto currentOrder = mapper.map(o,OrderResponseDto.class);
+			currentOrder.setAddress(o.getDelhiveryAddress());
+			currentOrder.setProduct(o.getProduct());
+			newUserOrders.add(currentOrder);
+		}
+		return newUserOrders;
 	}
 }
