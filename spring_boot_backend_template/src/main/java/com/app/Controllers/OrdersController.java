@@ -8,10 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.Services.OrdersService;
@@ -40,7 +38,6 @@ public class OrdersController {
 			return ResponseEntity.status(HttpStatus.ACCEPTED)
 				.body(orderService.deleteOrder(orderId));
 		} catch (Exception e) {
-			// TODO: handle exception
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
    				 .body(new ApiResponse(e.getMessage()));
 		} 
@@ -51,7 +48,6 @@ public class OrdersController {
  			return ResponseEntity.status(HttpStatus.ACCEPTED)
  				.body(orderService.updateStatus(orderId));
  		} catch (Exception e) {
- 			// TODO: handle exception
  			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
     				 .body(new ApiResponse(e.getMessage()));
  		} 

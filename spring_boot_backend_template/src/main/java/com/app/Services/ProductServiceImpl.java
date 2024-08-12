@@ -17,37 +17,23 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class ProductServiceImpl implements ProductService {
-	
+
 
     @Autowired 
     private ProductDao prod;
-    
+
     @Autowired 
     private ProductVariantDao variant;
-    
+
     @Autowired
     private FilterDao filter;
 
     @Override
     public List<ProductVariant> getProductsByFilter(ProdFilterReqDTO product) {
         List<Long> imgids = filter.findByColorAndSize(product.getColor(), product.getSize());
-<<<<<<< HEAD
-        
-        List<Product> prodss = product.getCat()==null ? prod.findAll() : prod.findByCategoryName(product.getCat());
-        
-        List<Product> prods=new ArrayList<>();
-        for(Product p : prodss) {
-        	if(product.getPrice()!=null && p.getPrice()>=product.getPrice()[0] && p.getPrice()<=product.getPrice()[1]) {
-        	}
-        	prods.add(p);
-        	
-        }
-        
-        List<ProductResDTO> result = new ArrayList<>();
-        
-        for (Product p : prods) {
-=======
+        System.out.println(product);
         List<Product> allProducts = (product.getCat() == null) ? prod.findAll() : prod.findByCategoryName(product.getCat());
+
         List<Product> filteredProducts = allProducts.stream()
             .filter(p -> product.getPrice() == null ||
                          (p.getPrice() >= product.getPrice()[0] && p.getPrice() <= product.getPrice()[1]))
@@ -56,14 +42,13 @@ public class ProductServiceImpl implements ProductService {
         List<ProductVariant> result = new ArrayList<>();
 
         for (Product p : filteredProducts) {
->>>>>>> f11a88456a4b114d987a9b80d747ac2657b1ed01
             List<ProductVariant> variants = variant.findBypid(p.getPid());
 
             List<ProductVariant> filteredVariants = (product.getColor()==null && product.getSize()==null) ? variants : 
                 variants.stream()
                     .filter(v -> imgids.contains(v.getImgid()))
                     .collect(Collectors.toList());
-            
+
             for(ProductVariant fv : filteredVariants) {
             	result.add(fv);
             }
@@ -75,7 +60,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public String addProduct(ProductDTO prods) {
         Product newProduct = prod.save(prods.getProduct());
-        
+
         if (prods.getVariants() != null && !prods.getVariants().isEmpty()) {
             List<ProductVariant> productVariants = prods.getVariants().stream().map(variantDTO -> {
                 ProductVariant variant = new ProductVariant();
@@ -88,7 +73,7 @@ public class ProductServiceImpl implements ProductService {
 
             variant.saveAll(productVariants);
         }
-        
+
         return "Product added successfully!";
     }
 }
