@@ -28,7 +28,6 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public User login(UserLoginDTO u) {
-		// TODO Auto-generated method stub
 		User user = dao.findByEmail(u.getEmail()).orElseThrow(()->new RuntimeException("user not found"));
 		if(user.getPassword().equals(u.getPassword())) {
 			return user;

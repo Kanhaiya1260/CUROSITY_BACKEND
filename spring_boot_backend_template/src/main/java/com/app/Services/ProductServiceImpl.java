@@ -17,22 +17,22 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class ProductServiceImpl implements ProductService {
-	
+
 
     @Autowired 
     private ProductDao prod;
-    
+
     @Autowired 
     private ProductVariantDao variant;
-    
+
     @Autowired
     private FilterDao filter;
 
     @Override
     public List<ProductVariant> getProductsByFilter(ProdFilterReqDTO product) {
         List<Long> imgids = filter.findByColorAndSize(product.getColor(), product.getSize());
-         
         List<Product> allProducts = (product.getCat() == null) ? prod.findAll() : prod.findByCategoryName(product.getCat());
+
         List<Product> filteredProducts = allProducts.stream()
             .filter(p -> product.getPrice() == null ||
                          (p.getPrice() >= product.getPrice()[0] && p.getPrice() <= product.getPrice()[1]))
@@ -47,7 +47,7 @@ public class ProductServiceImpl implements ProductService {
                 variants.stream()
                     .filter(v -> imgids.contains(v.getImgid()))
                     .collect(Collectors.toList());
-            
+
             for(ProductVariant fv : filteredVariants) {
             	result.add(fv);
             }
@@ -58,7 +58,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public String addProduct(ProductDTO prods) {
         Product newProduct = prod.save(prods.getProduct());
-        
+
         if (prods.getVariants() != null && !prods.getVariants().isEmpty()) {
             List<ProductVariant> productVariants = prods.getVariants().stream().map(variantDTO -> {
                 ProductVariant variant = new ProductVariant();
@@ -71,7 +71,7 @@ public class ProductServiceImpl implements ProductService {
 
             variant.saveAll(productVariants);
         }
-        
+
         return "Product added successfully!";
     }
 }
