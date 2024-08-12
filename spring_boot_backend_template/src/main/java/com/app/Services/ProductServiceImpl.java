@@ -31,20 +31,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductVariant> getProductsByFilter(ProdFilterReqDTO product) {
         List<Long> imgids = filter.findByColorAndSize(product.getColor(), product.getSize());
-        
-        List<Product> prodss = product.getCat()==null ? prod.findAll() : prod.findByCategoryName(product.getCat());
-        
-        List<Product> prods=new ArrayList<>();
-        for(Product p : prodss) {
-        	if(product.getPrice()!=null && p.getPrice()>=product.getPrice()[0] && p.getPrice()<=product.getPrice()[1]) {
-        	}
-        	prods.add(p);
-        	
-        }
-        
-        List<ProductDTO> result = new ArrayList<>();
-        
-        for (Product p : prods) {
+         
         List<Product> allProducts = (product.getCat() == null) ? prod.findAll() : prod.findByCategoryName(product.getCat());
         List<Product> filteredProducts = allProducts.stream()
             .filter(p -> product.getPrice() == null ||
@@ -68,8 +55,6 @@ public class ProductServiceImpl implements ProductService {
 
         return result;
        }
-    }
-
     @Override
     public String addProduct(ProductDTO prods) {
         Product newProduct = prod.save(prods.getProduct());
