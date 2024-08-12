@@ -1,5 +1,7 @@
 package com.app.Controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.Services.OrdersService;
+import com.app.Services.UserService;
 import com.app.dto.ApiResponse;
+import com.app.dto.OrderResponseDto;
 import com.app.dto.OrdersDTO;
 
 @RestController
@@ -55,5 +59,9 @@ public class OrdersController {
      @GetMapping("/trending")
      public ResponseEntity<?>trendingOrders(){
     	return ResponseEntity.ok(orderService.getTrendingProducts());
+     }
+     @GetMapping("/{Id}")
+     public ResponseEntity<?>getOrdersOfUser(Long Id){    	 
+    	 return ResponseEntity.ok(orderService.UserOrders(Id));
      }
 }
