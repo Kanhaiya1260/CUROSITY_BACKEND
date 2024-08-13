@@ -1,27 +1,39 @@
 package com.app.Entities;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
 import org.hibernate.validator.constraints.Length;
+
+import com.fasterxml.jackson.annotation.JacksonInject;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
  
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
  public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,14 +60,13 @@ import lombok.Setter;
 	@Enumerated(EnumType.STRING)
 	@Column(length = 10)
 	private Role role;
-	
+
 	private LocalDate DOB;
-	
-	@JoinColumn(name = "aid")
-	@OneToOne
-	private Address address;
+	@OneToMany(mappedBy = "user", orphanRemoval = true)
+	@JsonManagedReference
+	private List<Address> address = new ArrayList<>();
 	
 	@JoinColumn(name="account_id")
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY)
 	private Account account;
 }

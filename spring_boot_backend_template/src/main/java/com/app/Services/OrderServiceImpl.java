@@ -70,7 +70,6 @@ public class OrderServiceImpl implements OrdersService {
 		currentOrder.setUser(user);
 		product.setStock(product.getStock()-order.getQuantity());
 		productDao.save(product);
-		System.out.println(currentOrder);
 		orderDao.save(currentOrder);
 		
 		return new ApiResponse("Added Order SuccessFully!");
