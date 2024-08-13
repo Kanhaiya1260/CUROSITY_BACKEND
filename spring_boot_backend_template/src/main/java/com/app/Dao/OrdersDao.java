@@ -12,10 +12,10 @@ import com.app.dto.OrderResponseDto;
 import com.app.dto.TrendingOrderDTO;
 
 public interface OrdersDao extends JpaRepository<Orders,Long> {
-	@Query("SELECT new com.app.dto.TrendingOrderDTO(o.product.pid, SUM(o.quantity)) " +
+	@Query("SELECT new com.app.dto.TrendingOrderDTO(o.product.imgid, SUM(o.quantity)) " +
 		       "FROM Orders o " +
 		       "WHERE o.orderDate BETWEEN :startDate AND :endDate " +
-		       "GROUP BY o.product.pid")
+		       "GROUP BY o.product.imgid")
 	List<TrendingOrderDTO> findOrdersInDateRange(@Param("startDate")LocalDate startDate,@Param("endDate")LocalDate endDate);
 	
 	@Query("SELECT o FROM Orders o JOIN FETCH o.delhiveryAddress WHERE o.user.id =:Id")

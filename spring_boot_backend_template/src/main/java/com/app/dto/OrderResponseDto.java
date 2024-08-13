@@ -7,6 +7,7 @@ import javax.validation.constraints.NotEmpty;
 
 import com.app.Entities.Address;
 import com.app.Entities.Product;
+import com.app.Entities.ProductVariant;
 
 import lombok.Data;
 import lombok.ToString;
@@ -20,5 +21,5 @@ public class OrderResponseDto {
 	private Integer quantity;
     private boolean status;
     private Address address;
-    private Product product;
+    private ProductVariant product;
 }

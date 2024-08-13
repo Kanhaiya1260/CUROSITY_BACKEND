@@ -45,7 +45,7 @@ public class Orders {
    private Address delhiveryAddress;
    @OneToOne
    @JoinColumn(name="pid",nullable = false)
-   private Product product;
+   private ProductVariant product;
    @OneToOne
    @JoinColumn(name="uid",nullable = false)
    private User user; 

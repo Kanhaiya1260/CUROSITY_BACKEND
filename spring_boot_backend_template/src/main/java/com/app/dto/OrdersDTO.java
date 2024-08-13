@@ -30,7 +30,7 @@ public class OrdersDTO {
     @NotEmpty
     private Long addressId;
     @NotEmpty
-    private Long productId;
+    private Long productVarientId;
     @NotEmpty
     private Long userId;
 }
