@@ -12,7 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductDTO {
-	
+	private Long uid;
 	private Product product;
     private List<ProductVariantDTO> variants; 
 	
