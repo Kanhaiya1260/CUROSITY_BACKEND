@@ -23,7 +23,7 @@ import lombok.ToString;
 public class ProductVariant {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long imgid;
 			
 	private int stock;

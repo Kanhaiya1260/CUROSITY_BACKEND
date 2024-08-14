@@ -43,16 +43,17 @@ public class UserController {
 	@PostMapping("/register")
 	public ResponseEntity<?> register(@RequestBody @Valid UserRegisterDTO u){
 		try {
-			return ResponseEntity.status(HttpStatus.CREATED).body(serv.register(u));
+			return ResponseEntity.status(HttpStatus.CREATED)
+					.body(new ApiResponse("success",serv.register(u)));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(e.getMessage());
 		}
 	}
-	
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody @Valid UserLoginDTO u){
 		try {
-			return ResponseEntity.status(HttpStatus.OK).body(serv.login(u));
+			return ResponseEntity.status(HttpStatus.OK)
+					.body(new ApiResponse<UserResponseDto>("success","SuccessFully Logged In",serv.login(u)));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(new ApiResponse(e.getMessage()));
 		}
