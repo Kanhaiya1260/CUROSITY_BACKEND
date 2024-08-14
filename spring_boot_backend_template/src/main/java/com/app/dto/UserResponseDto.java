@@ -22,12 +22,11 @@ import lombok.ToString;
 @ToString
 public class UserResponseDto {
 	
-	private Long id; 
+	private Long uid; 
 	private String firstName;
 	private String lastName;
   	private String email;
 	private Role role;
-	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate DOB;
 }
