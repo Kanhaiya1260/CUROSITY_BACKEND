@@ -42,7 +42,6 @@ public class ProductController {
 	    filter.setCat(cat);
 	    filter.setPrice(price);
 
-	    // Fetch products using the service
 	    List<ProductVariant> products = ps.getProductsByFilter(filter);
 	    return ResponseEntity.ok(products);
 	}

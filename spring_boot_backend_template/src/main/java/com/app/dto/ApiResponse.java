@@ -1,11 +1,7 @@
 package com.app.dto;
 
 import java.time.LocalDateTime;
-<<<<<<< HEAD
 
-import lombok.Data;
-=======
->>>>>>> a130f28a1b28e92bf2bcf0fb7a86d1e37f486e07
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,8 +17,5 @@ public class ApiResponse {
 		this.message = message;
 		this.timeStamp=LocalDateTime.now();
 	}
-<<<<<<< HEAD
-=======
 
->>>>>>> a130f28a1b28e92bf2bcf0fb7a86d1e37f486e07
 }
