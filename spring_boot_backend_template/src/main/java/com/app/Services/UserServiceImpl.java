@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public ApiResponse updateUserDetails(UserResponseDto user) {
 		// TODO Auto-generated method stub
-		Long uid = user.getId();
+		Long uid = user.getUid();
 		User currentUser = dao.findById(uid).orElseThrow(()-> new ResourceNotFoundException("User Not FOund"));
 		System.out.println(user);
 		System.out.println(user.getDOB());
