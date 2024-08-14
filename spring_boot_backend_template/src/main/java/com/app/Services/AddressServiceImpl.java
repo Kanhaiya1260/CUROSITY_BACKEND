@@ -39,7 +39,6 @@ public class AddressServiceImpl implements AddressService {
 	    }
 	    User currentUser = currentUserOpt.get();
 		Address currentAddress = mapper.map(address,Address.class);
-		currentUser.getAddress().add(currentAddress);
 		currentAddress.setUser(currentUser);
 		addressDao.save(currentAddress);
 		return  new ApiResponse("Address Added SuccessFully");
@@ -47,11 +46,6 @@ public class AddressServiceImpl implements AddressService {
 
 	@Override
 	public List<Address> GetUserAddress(Long uid) {
-		Optional<User> currentUserOpt = userDao.findById(uid);
-		if(currentUserOpt.isPresent()) {
-			 currentUserOpt.get().getAddress().size();
-		     return currentUserOpt.get().getAddress();
-		}
-		return null;
+		return addressDao.findAllUserAddressById(uid);
 	}
 }

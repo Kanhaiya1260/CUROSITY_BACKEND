@@ -29,6 +29,7 @@ import com.app.customException.ResourceNotFoundException;
 import com.app.dto.ApiResponse;
 import com.app.dto.OrderResponseDto;
 import com.app.dto.OrdersDTO;
+import com.app.dto.ProductVariantDTO;
 import com.app.dto.TrendingOrderDTO;
 
 @Service
@@ -104,7 +105,7 @@ public class OrderServiceImpl implements OrdersService {
 	}
 
 	@Override
-	public List<ProductVariant> getTrendingProducts() {
+	public List<ProductVariantDTO> getTrendingProducts() {
 		 
 		List<TrendingOrderDTO> listOfOrders = orderDao.findOrdersInDateRange(LocalDate.now().minusDays(7),LocalDate.now());
 		
@@ -112,11 +113,12 @@ public class OrderServiceImpl implements OrdersService {
 				.sorted((o1,o2) -> o2.getTotalQuantity().compareTo(o1.getTotalQuantity()))
 				.limit(6)
 				.collect(Collectors.toList());
-		List<ProductVariant> result = new ArrayList<>();
+		List<ProductVariantDTO> result = new ArrayList<>();
 		for(TrendingOrderDTO order : listOfOrders) {
 			ProductVariant currentProduct = productDao.findById(order.getProductId())
 					.orElseThrow(()-> new ResourceNotFoundException("Product Not Found"));
-				result.add(currentProduct);	
+			    System.out.println("hello");
+				result.add(mapper.map(currentProduct,ProductVariantDTO.class));	
 		}
 		return result;
 	}
@@ -126,9 +128,11 @@ public class OrderServiceImpl implements OrdersService {
 		List<Orders> userOrders = orderDao.findOrdersById(Id);
 		List<OrderResponseDto> newUserOrders = new ArrayList<OrderResponseDto>();
 		for(Orders o : userOrders ) {
+			ProductVariant currentProduct = o.getProduct();
 			OrderResponseDto currentOrder = mapper.map(o,OrderResponseDto.class);
+			ProductVariantDTO currDto =  mapper.map(currentProduct,ProductVariantDTO.class);
 			currentOrder.setAddress(o.getDelhiveryAddress());
-			currentOrder.setProduct(o.getProduct());
+			currentOrder.setProductDto(currDto);
 			newUserOrders.add(currentOrder);
 		}
 		return newUserOrders;

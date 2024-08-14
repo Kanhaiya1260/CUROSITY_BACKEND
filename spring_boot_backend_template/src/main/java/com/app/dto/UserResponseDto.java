@@ -5,7 +5,10 @@ import java.time.LocalDate;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.app.Entities.Role;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,9 +22,12 @@ import lombok.ToString;
 @ToString
 public class UserResponseDto {
 	
+	private Long id; 
 	private String firstName;
 	private String lastName;
   	private String email;
 	private Role role;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate DOB;
 }
