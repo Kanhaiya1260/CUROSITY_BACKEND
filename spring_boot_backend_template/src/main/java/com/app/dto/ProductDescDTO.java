@@ -20,5 +20,6 @@ public class ProductDescDTO {
 	private List<Long> imgIds;
 	private LocalDate date;
 	private List<Size> sizes;
+	private int rating;
 	
 }

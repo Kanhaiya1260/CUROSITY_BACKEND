@@ -39,4 +39,6 @@ public class ProductVariant {
 	@JoinColumn(name="uid")
 	private User user;
 	
+	private int rating;
+	
 }

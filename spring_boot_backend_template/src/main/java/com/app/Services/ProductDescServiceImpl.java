@@ -43,6 +43,7 @@ public ProductDescDTO getProductDetails(Long imgid) {
             for(ProductVariant fv : variants) {
             	imgids.add(fv.getImgid());
             }		
+            prodDetails.setRating(prodvar.getRating());
             prodDetails.setImgIds(imgids);
             prodDetails.setSizes(sizes);
             prodDetails.setDate(LocalDate.now().plusDays(7));

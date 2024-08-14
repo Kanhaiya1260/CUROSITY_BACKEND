@@ -7,6 +7,7 @@ import com.app.Dao.FilterDao;
 import com.app.Dao.ProductDao;
 import com.app.Dao.ProductVariantDao;
 import com.app.Dao.UserDao;
+import com.app.Entities.Filter;
 import com.app.Entities.Product;
 import com.app.Entities.ProductVariant;
 import com.app.Entities.User;
@@ -84,13 +85,17 @@ public class ProductServiceImpl implements ProductService {
                 variant.setStock(variantDTO.getStock());
                 variant.setImgid(variantDTO.getImgid());
                 variant.setUser(currentUser);
-                variant.setProduct(newProduct);  
+                variant.setProduct(newProduct); 
+//                Filter filter = new Filter();
+//                filter.setColor(variantDTO.getColor());
+//                filter.setImgid(variantDTO.getImgid());
+//                filter.setSize(variantDTO.get)
                 return variant;
             }).collect(Collectors.toList());
 
             variant.saveAll(productVariants);
         }
-
+        
         return "Product added successfully!";
     }
 	@Override
