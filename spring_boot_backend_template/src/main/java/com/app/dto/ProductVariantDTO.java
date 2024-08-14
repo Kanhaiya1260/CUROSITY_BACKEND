@@ -1,5 +1,7 @@
 package com.app.dto;
 
+import com.app.Entities.Product;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,4 +16,5 @@ public class ProductVariantDTO {
     private Long imgid;
     private String color;
     private int stock;
+    private Product product;
 }

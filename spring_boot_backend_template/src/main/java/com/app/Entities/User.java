@@ -2,7 +2,9 @@ package com.app.Entities;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -20,6 +22,7 @@ import javax.validation.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 
 import com.fasterxml.jackson.annotation.JacksonInject;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
@@ -61,12 +64,7 @@ import lombok.ToString;
 	@Column(length = 10)
 	private Role role;
 
+	@Column(name = "dob")
 	private LocalDate DOB;
-	@OneToMany(mappedBy = "user", orphanRemoval = true)
-	@JsonManagedReference
-	private List<Address> address = new ArrayList<>();
 	
-	@JoinColumn(name="account_id")
-	@OneToOne(fetch = FetchType.LAZY)
-	private Account account;
 }

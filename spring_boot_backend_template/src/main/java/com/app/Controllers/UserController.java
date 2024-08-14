@@ -18,6 +18,7 @@ import com.app.Entities.Address;
 import com.app.Services.AddressService;
 import com.app.Services.UserService;
 import com.app.dto.UserRegisterDTO;
+import com.app.dto.UserResponseDto;
 
 import ch.qos.logback.core.status.Status;
 
@@ -74,7 +75,14 @@ public class UserController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse("User Not Found"));
 		}
 	    return ResponseEntity.ok(allAddress);
-		
-		
+	}
+	
+	@PostMapping("/update")
+	public ResponseEntity<?>updateUserDetails(UserResponseDto user){
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(serv.updateUserDetails(user));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(new ApiResponse(e.getMessage()));
+		} 
 	}
 }
