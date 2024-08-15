@@ -48,7 +48,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductVariantDTO> getProductsByFilter(ProdFilterReqDTO product) {
         List<Long> imgids = filter.findByColorAndSize(product.getColor(), product.getSize());
-        List<Product> allProducts = (product.getCat() == null) ? prod.findAll() : prod.findByCategoryName(product.getCat());
+        List<Product> allProducts = (product.getCategory() == null) ? prod.findAll() : prod.findByCategoryName(product.getCategory());
 
         List<Product> filteredProducts = allProducts.stream()
             .filter(p -> product.getPrice() == null ||
@@ -86,10 +86,16 @@ public class ProductServiceImpl implements ProductService {
                 variant.setImgid(variantDTO.getImgid());
                 variant.setUser(currentUser);
                 variant.setProduct(newProduct); 
-//                Filter filter = new Filter();
-//                filter.setColor(variantDTO.getColor());
-//                filter.setImgid(variantDTO.getImgid());
-//                filter.setSize(variantDTO.get)
+                List<Filter> filters = variantDTO.getSizes().stream().map(size -> {
+                    Filter filter = new Filter();
+                    filter.setColor(variantDTO.getColor());
+                    filter.setImgid(variantDTO.getImgid());
+                    filter.setSize(size);
+                    return filter;
+                }).collect(Collectors.toList());
+
+                // Save filters
+                filter.saveAll(filters);
                 return variant;
             }).collect(Collectors.toList());
 

@@ -1,5 +1,7 @@
 package com.app.dto;
 
+import java.util.List;
+
 import com.app.Entities.Product;
 import com.app.Entities.Size;
 
@@ -18,5 +20,5 @@ public class ProductVariantDTO {
     private String color;
     private int stock;
     private Product product;
-    private Size size;
+    private List<Size> sizes;
 }

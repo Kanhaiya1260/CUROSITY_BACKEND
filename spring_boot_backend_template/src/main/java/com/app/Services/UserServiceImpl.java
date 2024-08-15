@@ -51,13 +51,12 @@ public class UserServiceImpl implements UserService{
 		// TODO Auto-generated method stub
 		Long uid = user.getUid();
 		User currentUser = dao.findById(uid).orElseThrow(()-> new ResourceNotFoundException("User Not FOund"));
-		System.out.println(user);
-		System.out.println(user.getDOB());
 		currentUser.setDOB(user.getDOB());
 		currentUser.setEmail(user.getEmail());
 		currentUser.setFirstName(user.getFirstName());
 		currentUser.setLastName(user.getLastName());
-		currentUser.setRole(user.getRole());
+		currentUser.setPhone(user.getPhone());
+		System.out.println("hello");
         dao.save(currentUser);
 		return new ApiResponse("Updated User Details");
 	}
