@@ -86,16 +86,6 @@ public class ProductServiceImpl implements ProductService {
                 variant.setImgid(variantDTO.getImgid());
                 variant.setUser(currentUser);
                 variant.setProduct(newProduct); 
-                List<Filter> filters = variantDTO.getSizes().stream().map(size -> {
-                    Filter filter = new Filter();
-                    filter.setColor(variantDTO.getColor());
-                    filter.setImgid(variantDTO.getImgid());
-                    filter.setSize(size);
-                    return filter;
-                }).collect(Collectors.toList());
-
-                // Save filters
-                filter.saveAll(filters);
                 return variant;
             }).collect(Collectors.toList());
 

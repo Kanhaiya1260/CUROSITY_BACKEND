@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.Entities.Address;
+import com.app.Entities.WishList;
 import com.app.Services.AddressService;
 import com.app.Services.UserService;
 import com.app.dto.UserRegisterDTO;
@@ -43,8 +45,7 @@ public class UserController {
 	@PostMapping("/register")
 	public ResponseEntity<?> register(@RequestBody @Valid UserRegisterDTO u){
 		try {
-			return ResponseEntity.status(HttpStatus.CREATED)
-					.body(new ApiResponse("success",serv.register(u)));
+			return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponse("success",serv.register(u)));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(e.getMessage());
 		}
@@ -52,8 +53,7 @@ public class UserController {
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody @Valid UserLoginDTO u){
 		try {
-			return ResponseEntity.status(HttpStatus.OK)
-					.body(new ApiResponse<UserResponseDto>("success","SuccessFully Logged In",serv.login(u)));
+			return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse<UserResponseDto>("success","SuccessFully Logged In",serv.login(u)));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(new ApiResponse(e.getMessage()));
 		}
@@ -70,7 +70,29 @@ public class UserController {
 		}
 	}
 	
-	@GetMapping("/address")
+	@PostMapping("/addToWishList")
+	public ResponseEntity<?> addtowishlist(@Valid @RequestBody WishList item){
+		try{
+		   return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponse(serv.addToWishList(item)));
+		}catch(Exception e){
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse(e.getMessage()));
+		}
+	}
+	
+	@GetMapping("/getWishList")
+	public ResponseEntity<?> getwishlist(@Valid @RequestParam Long uid){
+		try{
+		   return ResponseEntity.status(HttpStatus.CREATED).body(serv.getWishItems(uid));
+		}catch(Exception e){
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse(e.getMessage()));
+		}
+	}
+	@DeleteMapping("/delete/{imgid}")
+    public ResponseEntity<?> deleteProduct(@RequestParam Long imgid,@RequestParam Long uid){
+		return ResponseEntity.ok(serv.deleteFromWishList(imgid,uid));
+    }
+	
+	@GetMapping("/address") 
 	public ResponseEntity<?> getUserAddress(@RequestParam Long uid){
 		
 		List<Address> allAddress = addressService.GetUserAddress(uid);

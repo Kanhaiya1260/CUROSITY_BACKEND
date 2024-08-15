@@ -19,7 +19,7 @@ public interface ProductVariantDao extends JpaRepository<ProductVariant, Long> {
     List<ProductVariant> findBypid(@Param("pid") Long pid);
 
 	@Query("SELECT p FROM ProductVariant p WHERE p.imgid IN :imgids")
-	List<ProductVariant> findByImgid(@Param("imgids") Long imgids);
+	List<ProductVariant> findByImgid(@Param("imgids") List<Long> prods);
 	
 	@Query("SELECT p FROM ProductVariant p WHERE p.user.uid = :uid")
     List<ProductVariant> findAllProductVariant(@Param("uid") Long uid);
