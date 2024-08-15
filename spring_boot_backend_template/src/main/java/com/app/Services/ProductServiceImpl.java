@@ -48,7 +48,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductVariantDTO> getProductsByFilter(ProdFilterReqDTO product) {
         List<Long> imgids = filter.findByColorAndSize(product.getColor(), product.getSize());
-        List<Product> allProducts = (product.getCat() == null) ? prod.findAll() : prod.findByCategoryName(product.getCat());
+        List<Product> allProducts = (product.getCategory() == null) ? prod.findAll() : prod.findByCategoryName(product.getCategory());
 
         List<Product> filteredProducts = allProducts.stream()
             .filter(p -> product.getPrice() == null ||

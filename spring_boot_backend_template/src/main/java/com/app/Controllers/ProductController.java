@@ -39,14 +39,14 @@ public class ProductController {
 	public ResponseEntity<?> getProductByFilter(
 	        @RequestParam(required = false) String color,
 	        @RequestParam(required = false) Size size,
-	        @RequestParam(required = false) Category cat,
+	        @RequestParam(required = false) Category category,
 	        @RequestParam(required = false) int[] price) {
 
 	    // Create and populate the filter object
 	    ProdFilterReqDTO filter = new ProdFilterReqDTO();
 	    filter.setColor(color);
 	    filter.setSize(size);
-	    filter.setCat(cat);
+	    filter.setCategory(category);
 	    filter.setPrice(price);
 
 	    List<ProductVariantDTO> products = ps.getProductsByFilter(filter);

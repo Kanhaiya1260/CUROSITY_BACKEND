@@ -103,7 +103,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/update")
-	public ResponseEntity<?>updateUserDetails(UserResponseDto user){
+	public ResponseEntity<?>updateUserDetails(@RequestBody UserResponseDto user){
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(serv.updateUserDetails(user));
 		} catch (Exception e) {

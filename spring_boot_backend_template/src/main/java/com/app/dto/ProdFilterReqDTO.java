@@ -16,6 +16,6 @@ import lombok.ToString;
 public class ProdFilterReqDTO {
 	private Size size;
 	private String color;
-	private Category cat;
+	private Category category;
 	private int[] price;
 }
