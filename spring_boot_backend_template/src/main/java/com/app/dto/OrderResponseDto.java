@@ -21,5 +21,7 @@ public class OrderResponseDto {
 	private Integer quantity;
     private boolean status;
     private Address address;
-    private ProductVariantDTO productDto;
+    private ProductVariantDTO productDto; 
+    private String phoneNo;
+    private String userName;
 }

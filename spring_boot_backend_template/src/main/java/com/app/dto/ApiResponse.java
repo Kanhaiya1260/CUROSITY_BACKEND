@@ -21,13 +21,9 @@ public class ApiResponse<T> {
 		this.message = message;
 		this.timeStamp=LocalDateTime.now();
 	}
-<<<<<<< HEAD
-	public ApiResponse(String status,String message) {
-		this.status=status;
-=======
+
 	public ApiResponse(String status, String message) {
 		this.status = status;
->>>>>>> 5a9512f43265e7350189b2d5ecdd5c1ff8223684
 		this.message = message;
 		this.timeStamp = LocalDateTime.now();
 	}
