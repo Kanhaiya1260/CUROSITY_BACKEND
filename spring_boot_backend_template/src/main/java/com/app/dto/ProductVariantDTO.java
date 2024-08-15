@@ -19,4 +19,5 @@ public class ProductVariantDTO {
     private int stock;
     private Product product;
     private Size size;
+    private int rating;
 }
