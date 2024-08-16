@@ -81,11 +81,11 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public String addToWishList(WishList wishlistitem) {
+	public String addToWishList(Long imgid,Long uid) {
 		
 		WishList wsh = new WishList();
-		wsh.setImgid(wishlistitem.getImgid());
-		wsh.setUid(wishlistitem.getUid());
+		wsh.setImgid(imgid);
+		wsh.setUid(uid);
 		wishlistdao.save(wsh);
 		return "product added ot wishlist";
 	}
