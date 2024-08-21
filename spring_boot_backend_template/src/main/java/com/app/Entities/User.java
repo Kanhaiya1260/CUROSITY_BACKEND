@@ -56,8 +56,6 @@ import lombok.ToString;
 	@Column(unique = true)
 	private String phone;
 	
-	@Length(min = 6)
-	@Column(length = 40)
 	private String password;
 	
 	@Enumerated(EnumType.STRING)

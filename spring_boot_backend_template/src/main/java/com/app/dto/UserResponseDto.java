@@ -30,4 +30,5 @@ public class UserResponseDto {
 	private Role role;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate DOB;
+	private String token;
 }
