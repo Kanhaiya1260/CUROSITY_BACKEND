@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public ApiResponse updateUserDetails(UserResponseDto user) {
+	public UserResponseDto updateUserDetails(UserResponseDto user) {
 		// TODO Auto-generated method stub
 		Long uid = user.getUid();
 		User currentUser = dao.findById(uid).orElseThrow(()-> new ResourceNotFoundException("User Not FOund"));
@@ -74,9 +74,9 @@ public class UserServiceImpl implements UserService{
 		currentUser.setFirstName(user.getFirstName());
 		currentUser.setLastName(user.getLastName());
 		currentUser.setPhone(user.getPhone());
-		System.out.println("hello");
+		UserResponseDto response = mapper.map(currentUser,UserResponseDto.class);
         dao.save(currentUser);
-		return new ApiResponse("Updated User Details");
+        return response;
 	}
 
 	@Override
