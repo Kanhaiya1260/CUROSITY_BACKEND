@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public UserResponseDto updateUserDetails(UserResponseDto user) {
+	public ApiResponse updateUserDetails(UserResponseDto user) {
 		// TODO Auto-generated method stub
 		Long uid = user.getUid();
 		User currentUser = dao.findById(uid).orElseThrow(()-> new ResourceNotFoundException("User Not FOund"));
@@ -74,17 +74,17 @@ public class UserServiceImpl implements UserService{
 		currentUser.setFirstName(user.getFirstName());
 		currentUser.setLastName(user.getLastName());
 		currentUser.setPhone(user.getPhone());
+		System.out.println("hello");
         dao.save(currentUser);
-        UserResponseDto response = mapper.map(currentUser,UserResponseDto.class);
-        return response;
+		return new ApiResponse("Updated User Details");
 	}
 
 	@Override
-	public String addToWishList(WishList wishlistitem) {
+	public String addToWishList(Long imgid,Long uid){
 		
 		WishList wsh = new WishList();
-		wsh.setImgid(wishlistitem.getImgid());
-		wsh.setUid(wishlistitem.getUid());
+		wsh.setImgid(imgid);
+		wsh.setUid(uid);
 		wishlistdao.save(wsh);
 		return "product added ot wishlist";
 	}

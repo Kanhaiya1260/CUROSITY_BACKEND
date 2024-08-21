@@ -13,8 +13,8 @@ import com.app.dto.UserLoginDTO;
 public interface UserService {
 	public String register(UserRegisterDTO user);
 	public UserResponseDto login(UserLoginDTO user);
-	public UserResponseDto updateUserDetails(UserResponseDto  user);
-	public String addToWishList(WishList wishlistitem);
+	public ApiResponse updateUserDetails(UserResponseDto  user);
+	public String addToWishList(Long imgid,Long uid);
 	public List<WishListDTO> getWishItems(Long uid);
 	public ApiResponse deleteFromWishList(Long imgid,Long uid);
 }

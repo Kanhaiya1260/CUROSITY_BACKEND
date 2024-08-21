@@ -35,7 +35,7 @@ public ProductDescDTO getProductDetails(Long imgid) {
         ProductVariant prodvar = variant.findById(imgid).orElseThrow(() -> new ResourceNotFoundException("Product Doesn't Exist"));
         Product prod = prodvar.getProduct();
         ProductDescDTO prodDetails = new ProductDescDTO();
-		prodDetails.setProd(prod);
+		prodDetails.setProd(prod); 
 		
             List<ProductVariant> variants = variant.findBypid(prod.getPid());
             List<Size> sizes = filter.findByColorAndimgid(prodvar.getColor(),imgid);

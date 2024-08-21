@@ -89,16 +89,18 @@ public class UserController {
 	}
 	
 	@PostMapping("/addToWishList")
-	public ResponseEntity<?> addtowishlist(@Valid @RequestBody WishList item){
+	public ResponseEntity<?> addtowishlist(@Valid @RequestParam("imgid") Long imgid,@Valid
+		    @RequestParam("uid") Long uid ){
 		try{
-		   return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponse(serv.addToWishList(item)));
+		   return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponse(serv.addToWishList(imgid,uid)));
 		}catch(Exception e){
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse(e.getMessage()));
 		}
 	}
 	
 	@GetMapping("/getWishList")
-	public ResponseEntity<?> getwishlist(@Valid @RequestParam Long uid){
+	public ResponseEntity<?> getwishlist(@Valid
+		    @RequestParam("uid") Long uid ){
 		try{
 		   return ResponseEntity.status(HttpStatus.CREATED).body(serv.getWishItems(uid));
 		}catch(Exception e){

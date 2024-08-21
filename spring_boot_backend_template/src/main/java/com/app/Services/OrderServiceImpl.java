@@ -133,6 +133,8 @@ public class OrderServiceImpl implements OrdersService {
 			ProductVariantDTO currDto =  mapper.map(currentProduct,ProductVariantDTO.class);
 			currentOrder.setAddress(o.getDelhiveryAddress());
 			currentOrder.setProductDto(currDto);
+			currentOrder.setPhoneNo(o.getUser().getPhone());
+			currentOrder.setUserName(o.getUser().getFirstName()+" "+o.getUser().getLastName());
 			newUserOrders.add(currentOrder);
 		}
 		return newUserOrders;
