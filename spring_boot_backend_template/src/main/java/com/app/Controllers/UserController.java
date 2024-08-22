@@ -6,6 +6,9 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,6 +25,7 @@ import com.app.Services.AddressService;
 import com.app.Services.UserService;
 import com.app.dto.UserRegisterDTO;
 import com.app.dto.UserResponseDto;
+import com.app.security.JwtUtils;
 
 import ch.qos.logback.core.status.Status;
 
@@ -42,6 +46,12 @@ public class UserController {
 	@Autowired
 	private AddressService addressService;
 	
+	@Autowired
+	private JwtUtils jwtUtils;
+	
+	@Autowired
+	private AuthenticationManager authMgr;
+	
 	@PostMapping("/register")
 	public ResponseEntity<?> register(@RequestBody @Valid UserRegisterDTO u){
 		try {
@@ -53,7 +63,15 @@ public class UserController {
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody @Valid UserLoginDTO u){
 		try {
-			return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse<UserResponseDto>("success","SuccessFully Logged In",serv.login(u)));
+			UsernamePasswordAuthenticationToken token=new 
+					UsernamePasswordAuthenticationToken(u.getEmail(), 
+							u.getPassword());
+			Authentication verifiedToken = authMgr.authenticate(token);
+			String tokenVal = jwtUtils.generateJwtToken(verifiedToken);
+			UserResponseDto response = serv.login(u);
+			response.setToken(tokenVal);
+			return ResponseEntity.status(HttpStatus.OK)
+					.body(new ApiResponse<UserResponseDto>("success","SuccessFully Logged In",response));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(new ApiResponse(e.getMessage()));
 		}

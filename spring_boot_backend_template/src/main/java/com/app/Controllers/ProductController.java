@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -60,12 +61,12 @@ public class ProductController {
 			return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(new ApiResponse(e.getMessage()));
 		}
 	}
-    @DeleteMapping("/delete/{productId}")
-    public ResponseEntity<?> deleteProduct(@RequestParam Long ProductId){
-		return ResponseEntity.ok(ps.deleteProductById(ProductId));
+    @DeleteMapping("/{productId}")
+    public ResponseEntity<?> deleteProduct(@PathVariable Long productId){
+		return ResponseEntity.ok(ps.deleteProductById(productId));
     }
     @GetMapping("/{userId}")
-    public ResponseEntity<?>getProductByUserId(@RequestParam Long userId){
+    public ResponseEntity<?>getProductByUserId(@PathVariable Long userId){
     	return  ResponseEntity.ok(ps.getAllProductsOfUser(userId));
     }
     @PatchMapping("/update")

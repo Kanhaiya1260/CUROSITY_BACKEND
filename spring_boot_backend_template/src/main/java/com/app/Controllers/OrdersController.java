@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.Services.OrdersService;
@@ -38,7 +39,7 @@ public class OrdersController {
     				 .body(new ApiResponse(e.getMessage()));
     	 }
      }
-     @DeleteMapping("/{orderId}")
+     @DeleteMapping()
      public ResponseEntity<?>deleteOrder(@PathVariable Long orderId){
     	 try {
 			return ResponseEntity.status(HttpStatus.ACCEPTED)
@@ -62,8 +63,8 @@ public class OrdersController {
      public ResponseEntity<?>trendingOrders(){
     	return ResponseEntity.ok(orderService.getTrendingProducts());
      }
-     @GetMapping("/{Id}")
-     public ResponseEntity<?>getOrdersOfUser(Long Id){    	 
+     @GetMapping()
+     public ResponseEntity<?>getOrdersOfUser(@RequestParam Long Id){    	 
     	 return ResponseEntity.ok(orderService.UserOrders(Id));
      }
 }

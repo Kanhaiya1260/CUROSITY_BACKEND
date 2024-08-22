@@ -20,7 +20,6 @@ public class ProductVariantDTO {
     private String color;
     private int stock;
     private Product product;
-
     private Size size;
     private int rating;
 }

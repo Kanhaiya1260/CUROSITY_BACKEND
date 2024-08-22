@@ -8,6 +8,7 @@ import java.util.Set;
 import javax.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.app.Dao.ProductDao;
@@ -45,10 +46,13 @@ public class UserServiceImpl implements UserService{
 	
 	@Autowired 
     private ProductVariantDao variant;
-
+	
+	private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
+	
 	@Override
 	public String register(UserRegisterDTO user) {
  		User newUser = mapper.map(user,User.class); 
+ 		newUser.setPassword(encoder.encode(newUser.getPassword()));
 		dao.save(newUser);
 		return "registered successfully!";
 	}
@@ -56,17 +60,12 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public UserResponseDto login(UserLoginDTO u) {
 		User user = dao.findByEmail(u.getEmail()).orElseThrow(()->new RuntimeException("user not found"));
-		if(user.getPassword().equals(u.getPassword())) {
-			UserResponseDto resultUser = mapper.map(user,UserResponseDto.class);
-			return resultUser;
-		}
-		else {
-			throw new RuntimeException("invalid credentials!");
-		}
+		UserResponseDto resultUser = mapper.map(user,UserResponseDto.class);
+		return resultUser;
 	}
 
 	@Override
-	public ApiResponse updateUserDetails(UserResponseDto user) {
+	public UserResponseDto updateUserDetails(UserResponseDto user) {
 		// TODO Auto-generated method stub
 		Long uid = user.getUid();
 		User currentUser = dao.findById(uid).orElseThrow(()-> new ResourceNotFoundException("User Not FOund"));
@@ -75,13 +74,13 @@ public class UserServiceImpl implements UserService{
 		currentUser.setFirstName(user.getFirstName());
 		currentUser.setLastName(user.getLastName());
 		currentUser.setPhone(user.getPhone());
-		System.out.println("hello");
+		UserResponseDto response = mapper.map(currentUser,UserResponseDto.class);
         dao.save(currentUser);
-		return new ApiResponse("Updated User Details");
+        return response;
 	}
 
 	@Override
-	public String addToWishList(Long imgid,Long uid) {
+	public String addToWishList(Long imgid,Long uid){
 		
 		WishList wsh = new WishList();
 		wsh.setImgid(imgid);
